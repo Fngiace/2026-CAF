@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>鑽石模型引導實戰｜五分鐘看懂團隊決策</title>
+<meta name="description" content="用五分鐘看懂 Sam Kaner 的鑽石模型：團隊討論如何經過發散、震盪、收斂，走到大家願意支持的決策。附真實案例與小測驗。">
+<meta property="og:title" content="鑽石模型引導實戰｜五分鐘看懂團隊決策">
+<meta property="og:description" content="好的決策不是一條直線，而是一顆鑽石。發散、震盪、收斂，一頁看懂。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1f3a; --bg2:#0e2647; --card:#132c50; --line:#25436e;
+  --text:#e9eff8; --muted:#a8b8d0; --cyan:#41e0ef; --orange:#f5a623; --groan:#8c9cb6;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  line-height:1.75;font-size:17px;
+  background-image:
+    linear-gradient(rgba(65,224,239,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(65,224,239,.035) 1px,transparent 1px);
+  background-size:48px 48px;}
+a{color:var(--cyan)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header.top{position:sticky;top:0;z-index:10;background:rgba(11,31,58,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
+.brand{font-weight:900;letter-spacing:.04em;text-decoration:none;color:var(--text);white-space:nowrap}
+.brand span{color:var(--cyan)}
+nav{min-width:0;flex:1;display:flex;justify-content:flex-end}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav a{display:block;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}
+nav a:hover,nav a.active{color:var(--text);background:var(--card)}
+.hero{padding:88px 0 56px;text-align:center}
+.eyebrow{display:inline-block;font-size:14px;color:var(--cyan);border:1px solid rgba(65,224,239,.45);border-radius:999px;padding:4px 14px;letter-spacing:.06em}
+.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.2;margin:20px 0 12px;font-weight:900}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(18px,2.4vw,22px);color:var(--muted);margin:0 auto;max-width:640px}
+.hero .meta{margin-top:28px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.chip{font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 14px;color:var(--muted)}
+section{padding:64px 0;border-top:1px solid rgba(37,67,110,.6)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-no{font-weight:900;color:var(--cyan);font-size:15px;letter-spacing:.1em}
+h2{font-size:clamp(26px,3.6vw,36px);margin:0;line-height:1.3}
+.sub{color:var(--muted);margin:6px 0 28px;max-width:760px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+.card.top-o{border-top:4px solid var(--orange)} .card.top-c{border-top:4px solid var(--cyan)} .card.top-g{border-top:4px solid var(--groan)}
+.grid2{display:grid;grid-template-columns:1fr 1.35fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+.card h3{margin:0 0 6px;font-size:22px}
+.card .tag{font-weight:700;font-size:15px}
+.o{color:var(--orange)} .c{color:var(--cyan)} .g{color:var(--groan)}
+.muted{color:var(--muted)}
+svg text{font-family:inherit}
+.diagram{width:100%;height:auto;display:block}
+.big-line{text-align:center;font-size:clamp(20px,2.8vw,28px);font-weight:900;margin:32px 0 0}
+.big-line b{color:var(--cyan)}
+/* interactive diamond */
+.zone{cursor:pointer;outline:none}
+.zone .shape{transition:opacity .2s, filter .2s}
+.zone:not(.on) .shape{opacity:.55}
+.zone.on .shape{opacity:1;filter:drop-shadow(0 0 10px currentColor)}
+.zone:focus-visible .shape{stroke:#fff;stroke-width:3}
+.tabs{display:flex;gap:10px;justify-content:center;margin:18px 0 0;flex-wrap:wrap}
+.tabs button{font:inherit;font-size:15px;font-weight:700;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--bg)}
+.tabs button[data-z="div"][aria-selected="true"]{background:var(--orange);border-color:var(--orange)}
+.tabs button[data-z="groan"][aria-selected="true"]{background:var(--groan);border-color:var(--groan)}
+.tabs button[data-z="conv"][aria-selected="true"]{background:var(--cyan);border-color:var(--cyan)}
+.panel{margin-top:18px;min-height:150px}
+.panel h3{margin:0 0 4px}
+.panel ul{margin:8px 0 0;padding-left:1.2em}
+/* steps */
+.step-n{font-size:44px;font-weight:900;line-height:1}
+.tips{margin:14px 0 0;padding:0;list-style:none}
+.tips li{padding:10px 0 10px 28px;border-top:1px dashed var(--line);position:relative}
+.tips li::before{content:"✓";position:absolute;left:4px;color:var(--cyan);font-weight:900}
+.tips li.no::before{content:"✕";color:#ff7b7b}
+.quote{display:block;margin-top:6px;padding:8px 12px;border-left:3px solid var(--cyan);background:rgba(65,224,239,.07);border-radius:0 8px 8px 0;font-size:15px}
+.callout{margin-top:24px;padding:18px 22px;border-radius:var(--radius);border:1px solid var(--cyan);background:rgba(65,224,239,.08)}
+.callout strong{color:var(--cyan)}
+/* case */
+.case-bg{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;margin-bottom:20px}
+@media (max-width:820px){.case-bg{grid-template-columns:1fr}}
+.stat{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
+.stat div{flex:1;min-width:110px;background:var(--bg2);border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-size:26px;color:var(--cyan);line-height:1.2}
+.stat span{font-size:14px;color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+@media (max-width:820px){.flow{grid-template-columns:1fr}}
+.flow .card .zone-name{font-size:34px;font-weight:900;line-height:1.1}
+.opt{display:inline-block;margin:4px 6px 0 0;padding:4px 12px;border-radius:8px;background:var(--bg2);font-size:15px}
+.vs{display:flex;gap:10px;flex-direction:column;margin-top:8px}
+.vs div{background:var(--bg2);border-radius:10px;padding:8px 12px;font-size:15px}
+.lookback{margin-top:20px}
+.sim{margin-top:20px}
+.sim .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.sim button{font:inherit;font-size:15px;padding:8px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--text);cursor:pointer}
+.sim button[aria-pressed="true"]{border-color:var(--cyan);background:rgba(65,224,239,.15)}
+.sim .out{margin-top:8px;padding:14px 16px;border-radius:12px;background:var(--bg2);min-height:56px}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+/* quiz */
+.q{margin-bottom:18px}
+.q p.qt{font-weight:700;margin:0 0 10px}
+.q .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:640px){.q .opts{grid-template-columns:1fr}}
+.q button{font:inherit;font-size:16px;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--text);cursor:pointer}
+.q button:hover:not(:disabled){border-color:var(--cyan)}
+.q button.right{border-color:#4ade80;background:rgba(74,222,128,.14)}
+.q button.wrong{border-color:#ff7b7b;background:rgba(255,123,123,.12)}
+.q button:disabled{cursor:default}
+.q .fb{margin-top:10px;font-size:15px;min-height:1px}
+.score{font-weight:900;color:var(--cyan)}
+.three .card{text-align:center}
+.three .num{font-size:56px;font-weight:900;line-height:1.1}
+.closing{margin-top:24px;text-align:center;padding:18px;border:1px solid var(--cyan);border-radius:var(--radius);background:rgba(65,224,239,.06);font-weight:700;font-size:19px}
+footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer p{margin:4px 0}
+@media (max-width:640px){#diamond .lbl{font-size:28px}#diamond .zl{font-size:34px}#diamond .gz{font-size:44px}.wide-only{display:none}}
+.to-top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--line);color:var(--text);display:grid;place-items:center;text-decoration:none;font-size:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.to-top.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">鑽石<span>模型</span></a>
+    <nav aria-label="章節">
+      <ul>
+        <li><a href="#s1">直線 vs 鑽石</a></li>
+        <li><a href="#s2">全景圖</a></li>
+        <li><a href="#s3">發散區</a></li>
+        <li><a href="#s4">震盪到收斂</a></li>
+        <li><a href="#s5">真實案例</a></li>
+        <li><a href="#s6">小測驗</a></li>
+        <li><a href="#s7">三句話</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero wrap">
+    <span class="eyebrow">CAF（Certified Agile Facilitator）認證培訓</span>
+    <h1>鑽石模型<em>引導實戰</em></h1>
+    <p class="lead">為什麼會議常常吵很久，卻還是做不出好決策？<br>用五分鐘看懂團隊從「開始討論」走到「做出決策」的那顆鑽石。</p>
+    <div class="meta"><span class="chip">第二組 五分鐘試教</span><span class="chip">閱讀約 6 分鐘</span><span class="chip">附真實案例與小測驗</span></div>
+  </div>
+
+  <!-- 01 -->
+  <section id="s1">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">01</span><h2>你以為的會議 vs. 真實的會議</h2></div>
+      <p class="sub">我們心中理想的會議，是問題丟出來、大家很快拍板。但真實的討論，幾乎都不是一條直線。</p>
+      <div class="grid2">
+        <div class="card top-c">
+          <div class="tag c">想像</div>
+          <svg class="diagram" viewBox="0 0 400 220" role="img" aria-label="一條從討論開始直接到做出決策的直線">
+            <defs><marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#41e0ef"/></marker></defs>
+            <text x="30" y="92" fill="#a8b8d0" font-size="16">討論開始</text>
+            <text x="370" y="92" fill="#a8b8d0" font-size="16" text-anchor="end">做出決策</text>
+            <line x1="34" y1="112" x2="362" y2="112" stroke="#41e0ef" stroke-width="4" marker-end="url(#ac)"/>
+            <text x="200" y="186" fill="#e9eff8" font-size="19" font-weight="700" text-anchor="middle">提出問題 → 很快拍板</text>
+          </svg>
+        </div>
+        <div class="card top-o">
+          <div class="tag o">現實</div>
+          <svg class="diagram" viewBox="0 0 540 220" role="img" aria-label="意見先發散，經過震盪區，再收斂到決策">
+            <defs>
+              <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f5a623"/></marker>
+              <marker id="ac2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#41e0ef"/></marker>
+            </defs>
+            <g stroke="#f5a623" stroke-width="3" marker-end="url(#ao)">
+              <line x1="30" y1="112" x2="186" y2="40"/><line x1="30" y1="112" x2="186" y2="76"/><line x1="30" y1="112" x2="186" y2="112"/><line x1="30" y1="112" x2="186" y2="148"/><line x1="30" y1="112" x2="186" y2="184"/>
+            </g>
+            <rect x="196" y="30" width="148" height="164" fill="#5b6b85" stroke="#c9d6e8" stroke-dasharray="6 5" rx="4"/>
+            <text x="270" y="120" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">震盪區</text>
+            <g stroke="#41e0ef" stroke-width="3" marker-end="url(#ac2)">
+              <line x1="354" y1="40" x2="510" y2="112"/><line x1="354" y1="76" x2="510" y2="112"/><line x1="354" y1="112" x2="510" y2="112"/><line x1="354" y1="148" x2="510" y2="112"/><line x1="354" y1="184" x2="510" y2="112"/>
+            </g>
+            <text x="100" y="214" fill="#f5a623" font-size="16" font-weight="700" text-anchor="middle">發散</text>
+            <text x="440" y="214" fill="#41e0ef" font-size="16" font-weight="700" text-anchor="middle">收斂</text>
+          </svg>
+        </div>
+      </div>
+      <p class="big-line">好的決策不是一條直線，<span style="white-space:nowrap">而是一顆<b>鑽石</b>。</span></p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="s2">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">02</span><h2>全景圖：團隊決策的鑽石</h2></div>
+      <p class="sub">一場討論會經過三個區。點圖上的區塊或下面的按鈕，看看每一區發生什麼事、引導者該做什麼。</p>
+      <div class="card">
+        <svg class="diagram" id="diamond" viewBox="0 0 1000 430" role="group" aria-label="鑽石模型互動圖">
+          <defs>
+            <linearGradient id="gdiv" x1="0" x2="1"><stop offset="0" stop-color="#f5a623" stop-opacity=".15"/><stop offset="1" stop-color="#f5a623" stop-opacity=".55"/></linearGradient>
+            <linearGradient id="gconv" x1="0" x2="1"><stop offset="0" stop-color="#41e0ef" stop-opacity=".55"/><stop offset="1" stop-color="#41e0ef" stop-opacity=".15"/></linearGradient>
+            <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#c9d6e8" stroke-opacity=".25" stroke-width="3"/></pattern>
+          </defs>
+          <g class="zone" data-z="div" tabindex="0" role="button" aria-label="發散區" style="color:#f5a623">
+            <polygon class="shape" points="70,215 370,55 370,375" fill="url(#gdiv)" stroke="#f5a623" stroke-width="2"/>
+            <text x="250" y="40" class="zl" fill="#f5a623" font-size="22" font-weight="900" text-anchor="middle">發散區</text>
+          </g>
+          <g class="zone" data-z="groan" tabindex="0" role="button" aria-label="震盪區" style="color:#8c9cb6">
+            <path class="shape" d="M370 55 L395 70 L420 52 L445 72 L470 50 L495 70 L520 52 L545 72 L570 50 L600 66 L630 55 L630 375 L605 360 L580 380 L555 358 L530 380 L505 360 L480 382 L455 360 L430 380 L405 360 L370 375 Z" fill="#5b6b85" fill-opacity=".8" stroke="#c9d6e8" stroke-width="2" stroke-dasharray="6 5"/>
+            <rect class="shape" x="372" y="72" width="256" height="286" fill="url(#hatch)" pointer-events="none"/>
+            <text class="gz" x="500" y="226" fill="#fff" font-size="34" font-weight="900" text-anchor="middle">震盪區</text>
+            <text class="wide-only" x="500" y="40" fill="#c9d6e8" font-size="16" text-anchor="middle">Groan Zone</text>
+          </g>
+          <g class="zone" data-z="conv" tabindex="0" role="button" aria-label="收斂區" style="color:#41e0ef">
+            <polygon class="shape" points="630,55 630,375 930,215" fill="url(#gconv)" stroke="#41e0ef" stroke-width="2"/>
+            <text x="750" y="40" class="zl" fill="#41e0ef" font-size="22" font-weight="900" text-anchor="middle">收斂區</text>
+          </g>
+          <ellipse cx="632" cy="215" rx="38" ry="182" fill="none" stroke="#e9eff8" stroke-width="2" stroke-dasharray="4 6" pointer-events="none"/>
+          <text class="lbl" x="632" y="420" fill="#e9eff8" font-size="15" text-anchor="middle" pointer-events="none">建立共同理解</text>
+          <circle cx="70" cy="215" r="9" fill="#e9eff8"/><text class="lbl" x="90" y="262" fill="#a8b8d0" font-size="15" text-anchor="middle">討論開始</text>
+          <circle cx="930" cy="215" r="9" fill="#41e0ef"/><text class="lbl" x="910" y="262" fill="#a8b8d0" font-size="15" text-anchor="middle">做出決策</text>
+        </svg>
+        <div class="tabs" role="tablist" aria-label="選擇區域">
+          <button role="tab" data-z="div" aria-selected="true">發散區</button>
+          <button role="tab" data-z="groan" aria-selected="false">震盪區</button>
+          <button role="tab" data-z="conv" aria-selected="false">收斂區</button>
+        </div>
+        <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="s3">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">03</span><h2 class="o">發散區：把可能性攤開</h2></div>
+      <p class="sub">目標是從單一議題擴展出多元可能。這個階段的引導者不是「裁判」，而是「催化劑」：刻意撐開討論空間，抵抗團隊太早下結論的本能。</p>
+      <div class="grid3">
+        <div class="card top-o">
+          <div class="step-n o">1</div>
+          <h3>產生清單</h3>
+          <ul class="tips">
+            <li><b>把點子看得見：</b>用白板或便利貼寫下每一個想法，讓每個聲音都被看見。</li>
+            <li><b>先求量：</b>設定目標，例如「五分鐘想出 20 個可能」，用速度打破完美主義。</li>
+          </ul>
+        </div>
+        <div class="card top-o">
+          <div class="step-n o">2</div>
+          <h3>開放討論</h3>
+          <ul class="tips">
+            <li><b>問開放式問題：</b><span class="quote">「如果資源無限，我們會怎麼做？」<br>「還有完全不同角度的想法嗎？」</span></li>
+            <li><b>邀請安靜的人：</b>主動把麥克風遞給比較少發言的成員。</li>
+          </ul>
+        </div>
+        <div class="card top-o">
+          <div class="step-n o">3</div>
+          <h3>暫停評斷</h3>
+          <ul class="tips">
+            <li class="no"><b>先別打槍：</b>這時候出現「太貴了」「不可能」，就是收斂型的話跑太早了。</li>
+            <li><b>溫和攔截：</b><span class="quote">「這是很好的評估，我們先把它留到收斂階段。」</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="s4">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">04</span><h2>跨越深水區：從震盪到收斂</h2></div>
+      <p class="sub">點子一多，團隊就會覺得混亂、挫折。這是正常現象，不用急著救火，而是陪團隊走過去。</p>
+      <div class="grid2">
+        <div class="card top-g">
+          <div class="tag g">震盪區 Groan Zone</div>
+          <h3>看見它、陪它走過去</h3>
+          <p class="muted">意見分歧、彼此聽不懂、開始焦躁，甚至有人想「趕快投票算了」。跳過這一段，往往只得到表面上的共識。</p>
+          <p><b>怎麼走出去？</b>先讓大家真正理解彼此的立場和理由，也就是<b class="c">建立共同理解</b>，再進入收斂。</p>
+        </div>
+        <div class="card top-c">
+          <div class="tag c">收斂式思考 Convergent Thinking</div>
+          <h3>三個動作，做出大家願意支持的決策</h3>
+          <ul class="tips">
+            <li><b>清單排序（Sort list）：</b>用簡單的標準（例如影響力、可行性）把點子初步排列。</li>
+            <li><b>彙整主題（Group themes）：</b>找出點子之間的共通性，把相似的想法打包分類。</li>
+            <li><b>行使判斷（Exercise judgment）：</b>重新啟動批判性思考，評估風險與成本，引導團隊做出決策。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="s5">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">05</span><h2>真實案例：DevFest 網美牆要不要放講者照片？</h2></div>
+      <p class="sub">一個籌辦社群大會時真的遇過的小決策，剛好走完一整顆鑽石，也讓人看見震盪區最常見的收場方式。</p>
+
+      <div class="case-bg">
+        <div class="card">
+          <div class="tag c">背景</div>
+          <p style="margin:6px 0 0">DevFest 是 Google Developer Groups（GDG）社群主導的年度開發者大會，每年在全球各地舉辦，聚焦 Google AI 技術。DevFest Taipei 是台灣最大型的 Google 技術社群活動。</p>
+          <p class="muted" style="margin:10px 0 0">DevFest Taipei 2025：2025/12/13（日），國立臺灣大學博雅教學館；入選全球約 20 場 Featured DevFest 之一。</p>
+        </div>
+        <div class="card">
+          <div class="tag c">2025 DevFest（全球）</div>
+          <div class="stat">
+            <div><b>565</b><span>場活動</span></div>
+            <div><b>140</b><span>個國家</span></div>
+            <div><b>80 萬</b><span>名開發者</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="card top-o">
+          <div class="zone-name o">發散</div>
+          <h3>兩個方案浮現</h3>
+          <div class="vs"><div>A. 素面網美牆</div><div>B. 放上講者照片</div></div>
+        </div>
+        <div class="card top-g">
+          <div class="zone-name g">震盪</div>
+          <h3>意見卡住了</h3>
+          <div class="vs"><div>Google 希望素面</div><div>志工希望放講者照片</div></div>
+        </div>
+        <div class="card top-c">
+          <div class="zone-name c">收斂</div>
+          <h3>最後聽 Google 的</h3>
+          <p class="muted" style="margin:8px 0 0">採用素面版本。決策是做出來了，但靠的是「誰說了算」，不是大家一起收斂出來的。</p>
+        </div>
+      </div>
+
+      <div class="callout lookback">
+        <strong>回頭看：</strong>如果重來一次，會先跟大家約定一個判斷標準：<b>依準備時間長短來規劃</b>。標準先講好，討論就能從「立場之爭」變成「一起看條件做決定」。
+      </div>
+
+      <div class="card sim">
+        <div class="tag c">試試看：標準先講好，討論會變什麼樣？</div>
+        <div class="row" role="group" aria-label="準備時間">
+          <span>距離活動還有：</span>
+          <button type="button" data-t="long" aria-pressed="false">準備時間充裕</button>
+          <button type="button" data-t="short" aria-pressed="false">準備時間很趕</button>
+        </div>
+        <div class="out" id="simOut" aria-live="polite">選一個情境看看。</div>
+        <p class="note">示意用：實際上怎麼對應，要由團隊在討論一開始一起約定。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="s6">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">06</span><h2>小測驗：你抓到重點了嗎？</h2></div>
+      <p class="sub">四題，點選答案會馬上看到解說。</p>
+      <div id="quiz"></div>
+      <p>得分：<span class="score" id="score">0 / 4</span> <button type="button" id="reset" style="font:inherit;font-size:14px;margin-left:10px;padding:4px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);cursor:pointer">重新作答</button></p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="s7" class="three">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">07</span><h2>帶回團隊的三句話</h2></div>
+      <p class="sub">下次開會卡住時，記得這三句。</p>
+      <div class="grid3">
+        <div class="card top-o"><div class="num o">1</div><h3>先發散，再收斂</h3><p class="muted">丟點子的時候不打槍；<br>要拍板時再來比較篩選。</p></div>
+        <div class="card top-g"><div class="num g">2</div><h3>震盪區是正常的</h3><p class="muted">卡住、吵、煩，<br>代表大家正在消化不同意見。</p></div>
+        <div class="card top-c"><div class="num c">3</div><h3>陪團隊跨過去</h3><p class="muted">先幫大家建立共同理解，<br>再帶進收斂、做出決策。</p></div>
+      </div>
+      <p class="closing">引導者的工作：不是替團隊找答案，而是陪團隊走完整顆鑽石。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>鑽石模型（Diamond of Participatory Decision-Making）出自 Sam Kaner 等人所著《Facilitator's Guide to Participatory Decision-Making》。</p>
+    <p>本頁為 CAF（Certified Agile Facilitator）認證培訓第二組五分鐘試教的延伸教材。整理：Fngi（徐方繹）</p>
+  </div>
+</footer>
+<a class="to-top" href="#top" aria-label="回到頂端">↑</a>
+
+<script>
+(function(){
+  // ---------- interactive diamond ----------
+  var info = {
+    div: {cls:'o', title:'發散區：探索無限可能',
+      body:'從單一議題擴展出多元想法，允許天馬行空。',
+      list:['目標：讓選項變多，而不是變好','引導者：當催化劑，不當裁判','關鍵動作：產生清單、開放討論、暫停評斷']},
+    groan: {cls:'g', title:'震盪區：意見碰撞與混亂',
+      body:'點子太多、立場不同、彼此聽不懂，團隊開始覺得煩。這是正常的必經之路。',
+      list:['常見訊號：有人想趕快投票、有人沉默、討論繞圈','引導者：不急著救火，陪團隊走過去','出口：建立共同理解，讓大家真的聽懂彼此的理由']},
+    conv: {cls:'c', title:'收斂區：凝聚焦點',
+      body:'在共同理解的基礎上，開始比較、篩選，做出大家願意支持的決策。',
+      list:['清單排序：用簡單標準初步排列','彙整主題：把相似的想法打包','行使判斷：評估風險與成本，做出決策']}
+  };
+  var panel = document.getElementById('panel');
+  var zones = document.querySelectorAll('#diamond .zone');
+  var tabs = document.querySelectorAll('.tabs button');
+  function show(z){
+    var d = info[z];
+    panel.innerHTML = '<h3 class="'+d.cls+'">'+d.title+'</h3><p class="muted" style="margin:0">'+d.body+'</p><ul>'+d.list.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+    zones.forEach(function(g){ g.classList.toggle('on', g.dataset.z===z); g.setAttribute('aria-pressed', g.dataset.z===z); });
+    tabs.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.z===z); });
+  }
+  zones.forEach(function(g){
+    g.addEventListener('click', function(){ show(g.dataset.z); });
+    g.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); show(g.dataset.z);} });
+  });
+  tabs.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.z); }); });
+  show('div');
+
+  // ---------- case simulator ----------
+  var simText = {
+    long: '<b class="c">時間充裕</b>：蒐集講者照片、設計排版、印刷都來得及，可以認真評估「放講者照片」這個方案，再跟主辦方一起看是否符合活動調性。',
+    short: '<b class="o">時間很趕</b>：照片蒐集與設計的風險太高，大家會比較容易一起同意「素面版本」是務實的選擇，而不是誰贏誰輸。'
+  };
+  var simBtns = document.querySelectorAll('.sim button');
+  simBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      simBtns.forEach(function(x){ x.setAttribute('aria-pressed', x===b); });
+      document.getElementById('simOut').innerHTML = simText[b.dataset.t];
+    });
+  });
+
+  // ---------- quiz ----------
+  var Q = [
+    {q:'團隊還在發散階段，有人說「這太貴了，不可能啦」。引導者最好怎麼做？',
+     o:['馬上展開成本討論','溫和攔下，把這個評估留到收斂階段','直接請大家投票','請他先別發言'], a:1,
+     e:'發散階段要暫停評斷。這個評估很有價值，但時機在收斂階段，先記下來就好。'},
+    {q:'會議裡意見很多、大家開始煩躁，還有人說「趕快投票算了」。團隊現在在哪一區？',
+     o:['發散區','震盪區','收斂區','已經做出決策'], a:1,
+     e:'這就是震盪區的典型訊號。這很正常，引導者要陪團隊走過去，而不是急著結束。'},
+    {q:'下列哪一個是「收斂式思考」的動作？',
+     o:['產生清單','暫停評斷','清單排序','開放討論'], a:2,
+     e:'收斂的三個動作是清單排序、彙整主題、行使判斷；其他三個都屬於發散。'},
+    {q:'DevFest 網美牆案例中，回頭看可以怎麼做得更好？',
+     o:['一開始就直接投票','全部聽志工的','先約定判斷標準：依準備時間長短規劃','乾脆不做網美牆'], a:2,
+     e:'先講好判斷標準，討論就會從「誰說了算」變成「一起看條件做決定」，大家更能支持結果。'}
+  ];
+  var quiz = document.getElementById('quiz'), scoreEl = document.getElementById('score'), score = 0;
+  function render(){
+    score = 0; scoreEl.textContent = '0 / '+Q.length; quiz.innerHTML = '';
+    Q.forEach(function(item, i){
+      var box = document.createElement('div'); box.className = 'card q';
+      box.innerHTML = '<p class="qt">'+(i+1)+'. '+item.q+'</p><div class="opts"></div><div class="fb" aria-live="polite"></div>';
+      var opts = box.querySelector('.opts'), fb = box.querySelector('.fb');
+      item.o.forEach(function(txt, j){
+        var b = document.createElement('button'); b.type='button'; b.textContent = String.fromCharCode(65+j)+'. '+txt;
+        b.addEventListener('click', function(){
+          var all = opts.querySelectorAll('button');
+          all.forEach(function(x){ x.disabled = true; });
+          all[item.a].classList.add('right');
+          if(j===item.a){ score++; fb.innerHTML = '<b style="color:#4ade80">答對了！</b> '+item.e; }
+          else { b.classList.add('wrong'); fb.innerHTML = '<b style="color:#ff9b9b">差一點。</b> '+item.e; }
+          scoreEl.textContent = score+' / '+Q.length;
+        });
+        opts.appendChild(b);
+      });
+      quiz.appendChild(box);
+    });
+  }
+  document.getElementById('reset').addEventListener('click', render);
+  render();
+
+  // ---------- nav highlight & to-top ----------
+  var links = document.querySelectorAll('nav a'), secs = Array.prototype.map.call(links, function(a){ return document.querySelector(a.getAttribute('href')); });
+  var toTop = document.querySelector('.to-top');
+  function onScroll(){
+    var y = window.scrollY + 120, cur = -1;
+    secs.forEach(function(s, i){ if(s && s.offsetTop <= y) cur = i; });
+    links.forEach(function(a, i){ a.classList.toggle('active', i===cur); });
+    toTop.classList.toggle('show', window.scrollY > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
+</script>
+</body>
+</html>
