@@ -2,7 +2,7 @@
 
 CAF（Certified Agile Facilitator）認證培訓第二組五分鐘試教的延伸教學網頁。
 
-**線上閱讀：** https://fngiace.github.io/2026-caf/
+**線上閱讀：** https://fngiace.github.io/2026-CAF/
 
 ## 內容
 
